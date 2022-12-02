@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class isLogin
+class isGuest
 {
     /**
      * Handle an incoming request.
@@ -18,8 +18,8 @@ class isLogin
     public function handle(Request $request, Closure $next)
     {
         if(Auth::check()){
-            return $next($request);
+            return redirect(route('dashboard'))->with('hasLogin', 'Silahakan Login');
         }
-        return redirect('/login')->with('notAllowed', 'Silahakan Login');
+        return $next($request);
     }
 }

@@ -1,11 +1,20 @@
 @extends('page.dashboard.layout')
 
 @section('content')
-    <div class="wrapper bg-white">
+
+<style>
+    input, textarea {
+        border-radius: 24px;
+        background: #e0e0e0;
+        box-shadow: inset 20px 20px 60px #bebebe,
+            inset -20px -20px 60px #ffffff;
+    }
+</style>
+<div class="wrapper" style="">
         <div class="d-flex align-items-start justify-content-between">
             <div class="d-flex flex-column">
-                <div class="h5">Create New Todo</div>
-                <p class="text-muted text-justify">
+                <div class="h5 text-light">Create New Todo</div>
+                <p class="text-light text-justify">
                     Here's a list of activities you have to do
                 </p>
                 <br>
@@ -29,7 +38,7 @@
                 <textarea type="text" name="description" id="description" class="form-control"></textarea>
             </div>
 
-            <input type="submit" value="Add Todo" class="btn bg-2 text-white mt-3">
+            <button type="submit" class="btn btn-secondary text-white mt-3">Add Todo</button>
         </form>
     </div>
 @endsection

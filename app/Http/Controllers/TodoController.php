@@ -127,14 +127,8 @@ class TodoController extends Controller
 
     public function dashboard()
     {
-        $todos = Todo::where('user_id', Auth::user()->id)->where('status', 0)->get();
+        $todos = Todo::where('user_id', Auth::user()->id)->orderBy('status', 'desc')->get();
         return view('page.dashboard.index', compact('todos'));
-    }
-
-    public function completed()
-    {
-        $todos = Todo::where('user_id', Auth::user()->id)->where('status', 1)->get();
-        return view('page.dashboard.completed', compact('todos'));
     }
 
     public function createTodo(){
@@ -157,40 +151,16 @@ class TodoController extends Controller
         return redirect()->route('dashboard')->with('success-todo', 'Buat todo berhasil');
     }
 
-    public function todoComplete(Request $request){
-        $todos = $request->todo;
-        if(!$todos){
-            return redirect()->route('dashboard')->with('empty', 'Tidak ada todo yang dipilih');
-        }
-        if($request->action == "uncomplete"){
-            foreach($todos as $t){
-                $todo = Todo::find($t)->update(['status' => 1]);
-            }
-            return redirect()->route('dashboard')->with('success-update', 'Buat todo berhasil');
-        }else{
-            foreach($todos as $t){
-                $todo = Todo::find($t)->delete();
-            }
-            return redirect()->route('dashboard')->with('success-delete', 'Buat todo berhasil');
-        }
+    public function todoComplete($id){
+        $todo = Todo::findOrfail($id);
+        $todo->status = 1;
+        $todo->update();
+        return redirect()->route('dashboard')->with('success-todo', 'Buat todo berhasil');
     }
 
-    public function todoUnComplete(Request $request){
-        $todos = $request->todo;
-        if(!$todos){
-            return redirect()->route('completed')->with('empty', 'Buat todo berhasil');
-        }
-        if($request->action == "uncomplete"){
-            foreach($todos as $t){
-                $todo = Todo::find($t)->update(['status' => 0]);
-            }
-            return redirect()->route('completed')->with('success-update', 'Buat todo berhasil');
-        }else{
-            foreach($todos as $t){
-                $todo = Todo::find($t)->delete();
-            }
-            return redirect()->route('completed')->with('success-delete', 'Buat todo berhasil');
-        }
+    public function todoDelete($id){
+        $todo = Todo::find($id)->delete();
+        return redirect()->route('dashboard')->with('success-delete', 'Buat todo berhasil');
     }
 
     public function UpdateTodo(Request $request, $id)

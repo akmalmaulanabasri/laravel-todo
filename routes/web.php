@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware('guest')->group(function(){
+Route::middleware('isGuest')->group(function(){
     Route::get('/', [TodoController::class, 'index'])->name('home');
     Route::get('/login', [TodoController::class, 'login'])->name('login')->middleware('guest');
     Route::post('/login', [TodoController::class, 'loginS'])->middleware('guest');
@@ -27,12 +27,12 @@ Route::middleware('guest')->group(function(){
 Route::get('/logout', [TodoController::class, 'logout'])->name('logout');
 
 Route::middleware('isLogin')->group(function(){
-    Route::get('/dashboard', [TodoController::class, 'dashboard'])->middleware('auth')->name('dashboard');
-    Route::get('/dashboard/completed', [TodoController::class, 'completed'])->middleware('auth')->name('completed');
-    Route::get('/dashboard/todo/edit/{id}', [TodoController::class, 'edit'])->middleware('auth')->name('todo-edit');
-    Route::get('/dashboard/add', [TodoController::class, 'createTodo'])->middleware('auth')->name('add');
-    Route::post('/dashboard/todo/update/{id}', [TodoController::class, 'UpdateTodo'])->middleware('auth')->name('UpdateTodo');
-    Route::post('/dashboard/add/posts', [TodoController::class, 'addTodo'])->middleware('auth')->name('addTodo');
-    Route::post('/dashboard/upd/post', [TodoController::class, 'todoUnComplete'])->middleware('auth')->name('todoUnComplete');
-    Route::post('/dashboard/add/post', [TodoController::class, 'todoComplete'])->middleware('auth')->name('todoComplete');
+    Route::get('/dashboard', [TodoController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/completed', [TodoController::class, 'completed'])->name('completed');
+    Route::get('/dashboard/todo/edit/{id}', [TodoController::class, 'edit'])->name('todo-edit');
+    Route::get('/dashboard/add', [TodoController::class, 'createTodo'])->name('add');
+    Route::post('/dashboard/todo/update/{id}', [TodoController::class, 'UpdateTodo'])->name('UpdateTodo');
+    Route::post('/dashboard/add/posts', [TodoController::class, 'addTodo'])->name('addTodo');
+    Route::get('/dashboard/todo/complete/{id}', [TodoController::class, 'todoComplete'])->name('todoComplete');  
+    Route::get('/dashboard/todo/delete/{id}', [TodoController::class, 'todoDelete'])->name('todoDelete');  
 });

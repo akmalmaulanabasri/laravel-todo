@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>TODO APP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -19,7 +19,7 @@
 }
 
 .bg-3{
-    background-color: #5AAA95;
+    /* background-color: #191919; */
 }
 
 .bg-4{
@@ -32,7 +32,7 @@
     </style>
 </head>
 
-<body class="bg-3">
+<body style="background-image: url('{{ asset('img/d_glass-morphism_card_1080p_4xbg.webp') }}'); background-size:cover;">
     
     @yield('content')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
